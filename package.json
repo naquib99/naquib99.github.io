@@ -9,9 +9,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -r https://github.com/naquib99/naquib99.github.io.git -b main",
-    "deploy:redirect": "gh-pages -d redirect -b gh-pages -m \"Redirect to naquib99.github.io\""
+    "deploy:redirect": "gh-pages -d redirect -r https://github.com/naquib99/naquib_portfolio.git -b gh-pages -m \"Redirect to naquib99.github.io\""
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
