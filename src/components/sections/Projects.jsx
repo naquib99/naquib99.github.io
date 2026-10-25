@@ -7,6 +7,7 @@ import {
   FaGooglePlay,
 } from "react-icons/fa";
 import { RevealOnScroll } from "../RevealOnScroll";
+import { trackEvent } from "../../analytics";
 
 const projects = [
   {
@@ -164,6 +165,7 @@ export const Projects = () => {
   const selectCategory = (c) => {
     if (c === category) return;
     setCategory(c);
+    trackEvent(`tab/${c}`);
     setIndex(0);
     if (scrollerRef.current) scrollerRef.current.scrollLeft = 0;
   };
@@ -292,6 +294,7 @@ export const Projects = () => {
                               href={href}
                               target="_blank"
                               rel="noopener noreferrer"
+                              onClick={() => trackEvent(`project/${title}/${label}`)}
                               className="inline-flex items-center gap-2 py-2 px-4 rounded-lg bg-fg text-page text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_4px_14px_rgba(59,130,246,0.35)]"
                             >
                               <Icon className="w-4 h-4" />

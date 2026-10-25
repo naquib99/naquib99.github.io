@@ -25,7 +25,22 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Check EmailJS secrets are set
+        env:
+          VITE_SERVICE_ID: ${{ secrets.VITE_SERVICE_ID }}
+          VITE_TEMPLATE_ID: ${{ secrets.VITE_TEMPLATE_ID }}
+          VITE_PUBLIC_KEY: ${{ secrets.VITE_PUBLIC_KEY }}
+        run: |
+          for v in VITE_SERVICE_ID VITE_TEMPLATE_ID VITE_PUBLIC_KEY; do
+            if [ -z "${!v}" ]; then
+              echo "::error::Missing repository secret $v (contact form would break)"; exit 1
+            fi
+          done
       - run: npm run build
+        env:
+          VITE_SERVICE_ID: ${{ secrets.VITE_SERVICE_ID }}
+          VITE_TEMPLATE_ID: ${{ secrets.VITE_TEMPLATE_ID }}
+          VITE_PUBLIC_KEY: ${{ secrets.VITE_PUBLIC_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

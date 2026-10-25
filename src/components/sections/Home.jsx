@@ -4,6 +4,7 @@ import {
   FaLinkedin,
   FaMapMarkerAlt,
 } from "react-icons/fa";
+import { trackEvent } from "../../analytics";
 
 // Staggered entrance: each hero element slides in shortly after the previous one.
 const enter = (step) => ({ animationDelay: `${200 + step * 120}ms` });
@@ -75,6 +76,7 @@ export const Home = () => {
                   rel="noopener noreferrer"
                   aria-label={label}
                   title={label}
+                  onClick={() => trackEvent(`social/${label}`)}
                   className="text-fg hover:text-accent transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
                 >
                   <Icon className="w-7 h-7 md:w-9 md:h-9" />
@@ -99,6 +101,7 @@ export const Home = () => {
             <a
               href={`${import.meta.env.BASE_URL}Ahmad_Naquib_Resume.pdf`}
               download="Ahmad_Naquib_Resume.pdf"
+              onClick={() => trackEvent("resume-download", "Resume download")}
               className="group inline-flex items-center gap-2 border border-blue-500/50 text-fg py-3 px-6 rounded font-medium transition-all duration-200
               hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:bg-blue-500/10"
             >

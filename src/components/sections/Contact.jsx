@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 import emailjs from "@emailjs/browser";
+import { trackEvent } from "../../analytics";
 
 // Spam guards: bots tend to fill every field and submit instantly.
 const MIN_FILL_MS = 3000;
@@ -51,6 +52,7 @@ export const Contact = () => {
       )
       .then(() => {
         setStatus({ type: "success", text: "Message sent! I'll get back to you soon." });
+        trackEvent("contact-form-sent", "Contact form sent");
         setFormData(emptyForm);
       })
       .catch((err) => {
